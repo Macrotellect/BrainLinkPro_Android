@@ -128,7 +128,7 @@
 ## BrainWave参考
 脑波信息实体类,实时解析芯片传给软件的脑波数据得到详细的脑波信息及电量值  
 **注：**
-连接BrainLink_Lite、Mind Link，只有signal，att，med，delta，theta，lowAlpha，highAlpha，lowBeta，highBeta, lowGamma, middleGamma
+连接BrainLink_Lite、Mind Link，只有signal，att，med，delta，theta，lowAlpha，highAlpha，lowBeta，highBeta, lowGamma, middleGamma, heartRate, temperature
 
 **字段**
 
@@ -145,6 +145,8 @@
 - **middleGamma**
 - **ap** 喜好度
 - **batteryCapacity** 电池电量百分比
+- **heartRate** 心率
+- **temperature** 额温
 
 ## Gravity参考
 

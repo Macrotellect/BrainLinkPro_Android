@@ -15,7 +15,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class BlueItemView extends ConstraintLayout {
-    private TextView att, med, sign, theta, delta, lowAlpha, highAlpha, lowBete, higBete, lowGamma, midGamma, ele, pre, tv_gravity, tv_name, hardVision, grind;
+    private TextView att, med, sign, theta, delta, lowAlpha, highAlpha, lowBete, higBete, lowGamma, midGamma, ele, pre, tv_gravity, tv_name, hardVision, grind, heart, temperature;
     private LineChart mLineChart;
     private TextView tv_connectType, tv_mac;
     private long startTime;
@@ -61,6 +61,9 @@ public class BlueItemView extends ConstraintLayout {
         hardVision = root.findViewById(R.id.hardVision);
         tv_name = root.findViewById(R.id.tv_name);
 
+        heart = root.findViewById(R.id.heart);
+        temperature = root.findViewById(R.id.temp);
+
         LineChartUtil.setLineChart(mLineChart);
 
 
@@ -83,6 +86,8 @@ public class BlueItemView extends ConstraintLayout {
         sign.setText("" + brainWave.signal);
         grind.setText("" + brainWave.grind);
         hardVision.setText("" + brainWave.hardwareversion);
+        heart.setText("" + brainWave.heartRate);
+        temperature.setText("" + brainWave.temperature);
         addData(mLineChart, brainWave.att, brainWave.med, (System.currentTimeMillis() - startTime) / 1000f, isAttCheck, isMedCheck);
     }
 

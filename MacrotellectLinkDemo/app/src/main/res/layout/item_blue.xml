@@ -406,12 +406,54 @@
         android:textColor="@color/colorAccent"
         android:textSize="14sp"/>
 
+    <TextView
+        android:id="@+id/heartLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@id/eleLabel"
+        app:layout_constraintTop_toBottomOf="@id/eleLabel"
+        android:text="心率："
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/heartLabel"
+        app:layout_constraintBottom_toBottomOf="@id/heartLabel"
+        tools:text="100"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tempLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/heartLabel"
+        app:layout_constraintBottom_toBottomOf="@id/heart"
+        android:layout_marginStart="60dp"
+        android:text="额温："
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tempLabel"
+        app:layout_constraintBottom_toBottomOf="@id/tempLabel"
+        tools:text="100"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:layout_constraintTop_toBottomOf="@id/ele"
+        app:layout_constraintTop_toBottomOf="@id/heart"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="10dp" />
 

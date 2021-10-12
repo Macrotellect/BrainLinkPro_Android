@@ -115,7 +115,7 @@ Log.e(TAG, "connected device name:" + blueConnectDevice.getName() + " mac: " +  
 Brainwave information entity class, a real-time analysis of the chip to the software that obtain detailed brainwave information and power data.
 
 **Note：**\
-Connect to BrainLink_Liteand Mind Link，which only have : signal，att，med，delta，theta，lowAlpha，highAlpha，lowBeta，highBeta, lowGamma and middleGamma.
+Connect to BrainLink_Liteand Mind Link，which only have : signal，att，med，delta，theta，lowAlpha，highAlpha，lowBeta，highBeta, lowGamma, middleGamma, heartRate and temperature.
 
 **Basic Brainwave Data**
 
@@ -132,6 +132,8 @@ Connect to BrainLink_Liteand Mind Link，which only have : signal，att，med，
 - **middleGamma**
 - **ap**(Appreciation)
 - **batteryCapacity**(BatteryCapacity)
+- **heartRate**
+- **temperature**
 
 ## GravityReference
 

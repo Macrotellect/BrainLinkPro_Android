@@ -36,7 +36,7 @@
 
        dependencies{
               ...
-             implementation files('libs/ MacrotellectLink_V1.2.jar')
+             implementation files('libs/ MacrotellectLink_V1.4.3.jar')
        }
        
  ```
@@ -80,6 +80,10 @@
             @Override
             public void onGravity( String mac,  Gravity gravity) {
                //获取重力感应数据
+            }
+            @Override
+            public void onRR(String mac, ArrayList<Integer> rr, int oxygen) {
+                //获取RR值和血氧
             }
         });
 
@@ -187,6 +191,13 @@
 
 -  mac: 脑波设备的mac地址
 -  raw: 原始raw值
+
+**void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
+接受RR值和血氧
+
+-  mac: 脑波设备的mac地址
+-  rr: RR值数组
+-  oxygen: 血氧百分比
 
 ## OnConnectListener 参考
 

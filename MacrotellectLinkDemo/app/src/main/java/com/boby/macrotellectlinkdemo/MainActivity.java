@@ -226,6 +226,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            @Override
+            public void onRR(String mac, ArrayList<Integer> rr, int oxygen) {
+                
+            }
+
         };
 
         bluemanage = LinkManager.init(this);

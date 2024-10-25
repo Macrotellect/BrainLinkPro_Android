@@ -68,7 +68,7 @@ Receive brainwave data.
             }
             @Override
             public void onRR(String mac, ArrayList<Integer> rr, int oxygen) {
-                //获取RR值和血氧
+                //Receiving data: RR intervals and blood oxygen percentage
             }
         });
 

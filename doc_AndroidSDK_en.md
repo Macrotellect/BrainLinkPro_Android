@@ -1,4 +1,4 @@
-##    Android MacrotellectLink_V1.0 Development Guide
+##    Android MacrotellectLink Development Guide
 
 ### Introduction
 
@@ -175,11 +175,11 @@ Receive raw EEG data.
 -  raw:raw EEG data
 
 **void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
-接受RR值和血氧
+Receiving data: RR interval and blood oxygen percentage.
 
--  mac: 脑波设备的mac地址
--  rr: RR值数组
--  oxygen: 血氧百分比
+-  mac: mac address for BrainLink device
+-  rr: RR intervals
+-  oxygen: blood oxygen percentage
 
 ## OnConnectListenerReference
 

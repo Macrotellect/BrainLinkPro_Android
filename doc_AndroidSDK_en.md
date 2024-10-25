@@ -25,7 +25,7 @@ Receive brainwave data.
 ```
          dependencies{
               ..
-              implementation files('libs/MacrotellectLink_V1.2.jar')
+              implementation files('libs/MacrotellectLink_V1.4.3.jar')
        }
 
 ```
@@ -65,6 +65,10 @@ Receive brainwave data.
             @Override
             public void onGravity( String mac,  Gravity gravity) {
 				//receive gravity data
+            }
+            @Override
+            public void onRR(String mac, ArrayList<Integer> rr, int oxygen) {
+                //获取RR值和血氧
             }
         });
 
@@ -169,6 +173,13 @@ Receive raw EEG data.
 
 - mac: mac address of Brainwave device
 -  raw:raw EEG data
+
+**void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
+接受RR值和血氧
+
+-  mac: 脑波设备的mac地址
+-  rr: RR值数组
+-  oxygen: 血氧百分比
 
 ## OnConnectListenerReference
 

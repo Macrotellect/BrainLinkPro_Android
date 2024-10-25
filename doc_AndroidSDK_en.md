@@ -226,9 +226,5 @@ Set whitelist, only allow to connect whitelist. Please use' , 'to separate names
 Set the Bluetooth connection status callback<br>
 **public void setEegPowerDataListener(EEGPowerDataListenereegPowerDataListener)** <br>
 Set the brainwave data receiving callback<br>
-**public void startScan()**<br>
-start scan and connect<br>
-**public void disconnectDevice(String mac)**<br>
-Disconnect the Bluetooth connection with the device address mac<br>
-**public void close()**<br>
-close Bluetooth.  disconnect the connected  and stop scanning.<br>
+### Change Records
+**Add blood oxygen percentage**

@@ -1,4 +1,4 @@
-# Android MacrotellectLink_V1.0 开发指南
+# Android MacrotellectLink 开发指南
 
 ### 介绍
 
@@ -251,3 +251,6 @@
 断开设备地址为mac的蓝牙连接<br>
 **public void close()**<br>
 关闭蓝牙，调用该方法会断开已经连接的蓝牙，并停止扫描。<br>
+
+### 修改记录
+**新增血氧数据**

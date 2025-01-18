@@ -1,4 +1,4 @@
-##    Android MacrotellectLink_V1.0 Development Guide
+##    Android MacrotellectLink Development Guide
 
 ### Introduction
 
@@ -68,7 +68,7 @@ Receive brainwave data.
             }
             @Override
             public void onRR(String mac, ArrayList<Integer> rr, int oxygen) {
-                //获取RR值和血氧
+                //Receiving data: RR intervals and blood oxygen percentage
             }
         });
 
@@ -175,11 +175,11 @@ Receive raw EEG data.
 -  raw:raw EEG data
 
 **void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
-接受RR值和血氧
+Receiving data: RR interval and blood oxygen percentage.
 
--  mac: 脑波设备的mac地址
--  rr: RR值数组
--  oxygen: 血氧百分比
+-  mac: mac address for BrainLink device
+-  rr: RR intervals
+-  oxygen: blood oxygen percentage
 
 ## OnConnectListenerReference
 
@@ -226,9 +226,5 @@ Set whitelist, only allow to connect whitelist. Please use' , 'to separate names
 Set the Bluetooth connection status callback<br>
 **public void setEegPowerDataListener(EEGPowerDataListenereegPowerDataListener)** <br>
 Set the brainwave data receiving callback<br>
-**public void startScan()**<br>
-start scan and connect<br>
-**public void disconnectDevice(String mac)**<br>
-Disconnect the Bluetooth connection with the device address mac<br>
-**public void close()**<br>
-close Bluetooth.  disconnect the connected  and stop scanning.<br>
+### Change Records
+**Add blood oxygen percentage**

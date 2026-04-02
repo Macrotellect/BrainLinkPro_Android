@@ -47,6 +47,9 @@
 ```
        <uses-permission android:name="android.permission.BLUETOOTH" />
        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+       <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/> //API level 31 and higher
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"      />
        <uses-permission  android:name="android.permission.ACCESS_COARSE_LOCATION" />
        <uses-feature
@@ -174,26 +177,22 @@
 
 ### Method
 
-**void onBrainWavedata(String mac,BrainWave brainWave);**<br>
-接收解析的脑波信息。
+`void onBrainWavedata(String mac,BrainWave brainWave);`接收解析的脑波信息。
 
 - mac: 脑波设备的mac地址
 - brainWave: 脑波信息
 
-**void onGravity(String mac,Gravity gravity);**<br>
-接收解析的重力信息
+`void onGravity(String mac,Gravity gravity);`接收解析的重力信息
 
 - mac: 脑波设备的mac地址
 - gravity: 重力信息
 
-**void onRawData(String mac,int raw);**<br>
-接收原始raw值
+`void onRawData(String mac,int raw);`接收原始raw值
 
 -  mac: 脑波设备的mac地址
 -  raw: 原始raw值
 
-**void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
-接受RR值和血氧
+`void onRR(String mac, ArrayList<Integer> rr, int oxygen);`接受RR值和血氧
 
 -  mac: 脑波设备的mac地址
 -  rr: RR值数组
@@ -205,18 +204,17 @@
 
 ### Method
 
-**oid onConnectStart(BlueConnectDevice blueConnectDevice);**<br>
-开始尝试连接<br>
-**void onConnectting(BlueConnectDevice blueConnectDevice);**<br>
-连接中<br>
-**void onConnectFailed(BlueConnectDevice blueConnectDevice);**<br>
-连接失败<br>
-**void onConnectSuccess(BlueConnectDevice blueConnectDevice);**<br>
-连接成功<br>
-**void onConnectionLost(BlueConnectDevice blueConnectDevice);**<br>
-连接丢失（从已连接状态断开连接）<br>
-**void onError(Exception e);**<br>
-连接错误<br>
+`void onConnectStart(BlueConnectDevice blueConnectDevice);`开始尝试连接
+
+`void onConnectting(BlueConnectDevice blueConnectDevice);`连接中
+
+`void onConnectFailed(BlueConnectDevice blueConnectDevice);`连接失败
+
+`void onConnectSuccess(BlueConnectDevice blueConnectDevice);`连接成功
+
+`void onConnectionLost(BlueConnectDevice blueConnectDevice);`连接丢失（从已连接状态断开连接）
+
+`void onError(Exception e);`连接错误
 
 ## LinkManager参考
 
@@ -224,33 +222,51 @@
 
 ### Method
 
-**public static LinkManager init(Context context)**<br>
-初始化(单例)<br>
-**public void setDebug(boolean isDebug)**<br>
-是否打印log  默认不打印<br>
-**public void setMaxConnectSize(int count)**<br>
-设置最大连接数量,默认一个<br>
-**public void setConnectType(ConnectType connectType);**<br>
-设置连接类型<br>
+`public static LinkManager init(Context context)`初始化(单例)
 
-- **ConnectType. ONLYCLASSBLUE** 只通过3.0蓝牙连接设备，需要先手动配对
-- **ConnectType. ONLYBLEBLUE**只通过低功耗蓝牙连接设备，无需要先手动配对
-- **ConnectType. ALLDEVICE** 允许两种方式连接设备
+`public void setDebug(boolean isDebug)`是否打印log  默认不打印
 
-**getConnectSize();**<br>
-获取已连接的数量<br>
-**public void setWhiteList(String whiteList)**<br>
-设置白名单，只允许连接白名单内的设备名，多个设备之间用 ' , '分隔<br>
-**public void setOnConnectListener(OnConnectListener onConnectListener)**<br>
-设置蓝牙连接状态回调<br>
-**public void setEegPowerDataListener(EEGPowerDataListener eegPowerDataListener)** <br>
-设置脑波数据接收回调<br>
-**public void startScan()**<br>
-开始扫描连接<br>
-**public void disconnectDevice(String mac)**<br>
-断开设备地址为mac的蓝牙连接<br>
-**public void close()**<br>
-关闭蓝牙，调用该方法会断开已经连接的蓝牙，并停止扫描。<br>
+`public void setMaxConnectSize(int count)`设置最大连接数量,默认一个
+
+`public int getConnectSize()`获取已连接的数量
+
+`public void setWhiteList(String whiteList)`设置白名单，只允许连接白名单内的设备名，多个设备之间用 ' , '分隔
+
+`public void setOnConnectListener(OnConnectListener onConnectListener)`设置蓝牙连接状态回调
+
+`public void setMultiEEGPowerDataListener(EEGPowerDataListener eegPowerDataListener)`设置脑波数据接收回调
+
+`public void startScan()`开始扫描连接
+
+`public void close()`关闭蓝牙，调用该方法会断开已经连接的蓝牙，并停止扫描。
+
+`public void setScanCallBack(ScanCallBack scanCallBack)`设置扫描回调，如果不设置将扫描白名单设备自动连接，如果设置扫描回调将返回白名单设备进行手动连接
+
+`public void connectDevice(BlueConnectDevice device)`连接设备
+
+`public void disconnectDevice(BlueConnectDevice device)`断开设备
+
+`public void setScanCount(int count)`设置扫描设备个数，当连接个数小于MaxConnectSize，连接成功后将自动开启扫描
+
+`public void writeToDevice(String mac, String string)`向地址为mac的设备写入数据
+
+`public void writeToDevice(String string)`向当前连接的设备写入数据，如果连接了多个设备将默认写入第一个设备
+
+`public void setDataType(String mac, int dataType)`设置地址为mac设备的数据格式，（注：连接设备成功后调用生效），事例代码如下:
+
+`setDataType(mac, DATATYPE_DEFAULT); 关闭所有数据，最小数据格式`
+
+`setDataType(mac, DATATYPE_AP); 开启喜好度数据`
+
+`setDataType(mac, DATATYPE_GYRO); 开启陀螺仪数据`
+
+`setDataType(mac, DATATYPE_GRIND); 开启咬牙数据`
+
+`setDataType(mac, DATATYPE_AP | DATATYPE_GYRO | DATATYPE_GRIND); 开启所有数据`
+
+`public void setDataType(int dataType)` 设置连接设备的数据格式，如果连接多个设备默认设置第一个设备
+
+`public BlueConnectDevice[] getConnectedDevices()` 获取所有连接的设备
 
 ### 修改记录
 **新增血氧数据**

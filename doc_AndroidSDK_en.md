@@ -33,6 +33,9 @@ Receive brainwave data.
 ```
        <uses-permission android:name="android.permission.BLUETOOTH" />
        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+       <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/> ////API level 31 and higher
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"       />
        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
          <uses-feature
@@ -157,25 +160,21 @@ The class for receiving real-time parse chip data needs to be implemented by the
 
 ### Method
 
-**void onBrainWavedata(String mac,BrainWavebrainWave);**<br>
-Receive parsed brainwave data.
+`void onBrainWavedata(String mac,BrainWavebrainWave);`Receive parsed brainwave data.
 - mac: mac address of Brainwave device
 - brainWave:brainwave data
 
-**void onGravity(String mac,Gravity gravity);**<br>
-Receive parsed gravity data.
+`void onGravity(String mac,Gravity gravity);`Receive parsed gravity data.
 
 -  mac: mac address of Brainwave device
 -  gravity:gravity data
 
-**void onRawData(String mac,int raw);**<br>
-Receive raw EEG data.
+`void onRawData(String mac,int raw);`Receive raw EEG data.
 
 - mac: mac address of Brainwave device
 -  raw:raw EEG data
 
-**void onRR(String mac, ArrayList<Integer> rr, int oxygen);**<br>
-Receiving data: RR interval and blood oxygen percentage.
+`void onRR(String mac, ArrayList<Integer> rr, int oxygen);`Receiving data: RR interval and blood oxygen percentage.
 
 -  mac: mac address for BrainLink device
 -  rr: RR intervals
@@ -187,44 +186,68 @@ This class is the connection state monitoring interface between Bluetooth and br
 
 **Method**
 
-**oid onConnectStart(BlueConnectDeviceblueConnectDevice);**<br>
-trying to connect<br>
-**void onConnectting(BlueConnectDeviceblueConnectDevice);**<br>
-connecting<br>
-**void onConnectFailed(BlueConnectDeviceblueConnectDevice);**<br>
-disconnected<br>
-**void onConnectSuccess(BlueConnectDeviceblueConnectDevice);**<br>
-connected<br>
-**void onConnectionLost(BlueConnectDeviceblueConnectDevice);**<br>
-Lost connection (disconnected from connected state)
-**void onError(Exception e);**<br>
-connection error<br>
+`void onConnectStart(BlueConnectDeviceblueConnectDevice);`trying to connect
+
+`void onConnectting(BlueConnectDeviceblueConnectDevice);`connecting
+
+`void onConnectFailed(BlueConnectDeviceblueConnectDevice);`disconnected
+
+`void onConnectSuccess(BlueConnectDeviceblueConnectDevice);`connected
+
+`void onConnectionLost(BlueConnectDeviceblueConnectDevice);`Lost connection (disconnected from connected state)
+
+`void onError(Exception e);`connection error
 
 ## LinkManagerReference
 This class handles the interaction between the Macrotellect’s hardware and Bluetooth devices.
 
 ### Method
 
-**public static LinkManagerinit(Context context)**<br>
-Initialization (singleton)<br>
-**public void setDebug(booleanisDebug)**<br>
-whether to print log (no print setting by default)<br>
-**public void setMaxConnectSize(int count)**<br>
-Set the maximum number of connections(1 is settedby default)<br>
-**public void setConnectType(ConnectTypeconnectType);**<br>
-set the type of connection<br>
+`public static LinkManagerinit(Context context)`Initialization (singleton)
 
--  **ConnectType. ONLYCLASSBLUE**  Only connect devices by classBluetooth, you need to manually pair them first.
--  **ConnectType. ONLYBLEBLUE**  Only connect devices by BLE Bluetooth
-- **ConnectType. ALLDEVICE**  Allow both ways to connect devices
+`public void setDebug(booleanisDebug)`whether to print log (no print setting by default)
 
-**getConnectSize();**<br>
-receive the number of connected devices<br>
-**public void setWhiteList(String whiteList)**<br>
-Set whitelist, only allow to connect whitelist. Please use' , 'to separate names of connected multiple devices.<br>
-**public void setOnConnectListener(OnConnectListeneronConnectListener)**<br>
-Set the Bluetooth connection status callback<br>
-**public void setEegPowerDataListener(EEGPowerDataListenereegPowerDataListener)** <br>
-Set the brainwave data receiving callback<br>
+`public void setMaxConnectSize(int count)`Set the maximum number of connections(1 is settedby default)
+
+`public int getConnectSize();`receive the number of connected devices
+
+`public void setWhiteList(String whiteList)`Set whitelist, only allow to connect whitelist. Please use' , 'to separate names of connected multiple devices.
+
+`public void setOnConnectListener(OnConnectListeneronConnectListener)`Set the Bluetooth connection status callback
+
+`public void setMultiEEGPowerDataListener(EEGPowerDataListenereegPowerDataListener)`Set the brainwave data receiving callback
+
+`public void startScan()`Start Scanning
+
+`public void close()`Disables Bluetooth, disconnects existing connections, and stops scanning.
+
+`public void setScanCallBack(ScanCallBack scanCallBack)`Sets the scan callback. If not set, whitelist devices will be scanned and connected automatically. If set, the callback returns whitelist devices for manual connection.
+
+`public void connectDevice(BlueConnectDevice device)`Connects to the device.
+
+`public void disconnectDevice(BlueConnectDevice device)`Disconnect device
+
+`public void setScanCount(int count)`Sets the maximum number of devices to scan. When the current connection count is less than MaxConnectSize, scanning will automatically resume after a successful connection.
+
+`public void writeToDevice(String mac, String string)`Writes data to the device with the specified MAC address.
+
+`public void writeToDevice(String string)`Writes data to the currently connected device. If multiple devices are connected, it defaults to writing to the first one.
+
+`public void setDataType(String mac, int dataType)`Sets the data format for the device with the specified MAC address. (Note: This takes effect only when called after a successful connection).
+
+`setDataType(mac, DATATYPE_DEFAULT); Disables all data and sets the data format to the minimum.`
+
+`setDataType(mac, DATATYPE_AP); open Ap data`
+
+`setDataType(mac, DATATYPE_GYRO); open gyro data`
+
+`setDataType(mac, DATATYPE_GRIND); open grind data`
+
+`setDataType(mac, DATATYPE_AP | DATATYPE_GYRO | DATATYPE_GRIND); open all data`
+
+`public void setDataType(int dataType)` Sets the data format for the connected device. If multiple devices are connected, it defaults to configuring the first one.
+
+`public BlueConnectDevice[] getConnectedDevices()` Retrieves all connected devices.
+
 ### Change Records
 **Add blood oxygen percentage**
